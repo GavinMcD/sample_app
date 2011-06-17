@@ -1,3 +1,3 @@
 # RoR Sample App - Twitter Clone 
 
-[Link to some site](www.elixirhealth.com)
+[*Link to some site*](http://www.elixirhealth.com)
