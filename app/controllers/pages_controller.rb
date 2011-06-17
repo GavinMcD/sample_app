@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  # RoR tut: likes to see which actions are defined within the controller
+  # guide: likes to see that all actions are defined within the controller
   
   def home
     @title = "Home"
