@@ -1,2 +1,26 @@
 require 'autotest/growl'
 require 'autotest/fsevent'
+require "autotest/restart"
+
+# Override autotest default magic to rerun all tests every time a
+# change is detected on the file system.
+class Autotest
+  def get_to_green
+    begin
+      rerun_all_tests
+      wait_for_changes unless all_good
+    end until all_good
+  end
+end
+# 
+# # ignore changes to the usual temp/version control files
+Autotest.add_hook :initialize do |autotest|
+  %w{.git .svn .hg .DS_Store ._* vendor tmp log doc}.each do |exception|
+    autotest.add_exception(exception)
+  end
+end
+
+Autotest.add_hook :initialize do |at|
+  at.add_mapping(%r%^spec/(.*)_spec\.rb$%) { |filename, _| filename }
+  at.add_mapping(%r%^app/(.*)\.rb$%) { |_, m| ["spec/#{m[1]}_spec.rb"] }
+end
