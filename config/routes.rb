@@ -1,6 +1,7 @@
 SampleApp::Application.routes.draw do
   
-  get "users/new"
+  # gives us the basic CRUD and show, new, etc.. for that resource
+  resources :users
 
   root :to => "pages#home"
 
