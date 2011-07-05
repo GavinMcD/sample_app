@@ -1,14 +1,19 @@
 SampleApp::Application.routes.draw do
-  
+
   # gives us the basic CRUD and show, new, etc.. for that resource
   resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
 
   root :to => "pages#home"
 
+  # with custom paths, notice how we need to name the controller in the :to hash
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
   match '/signup',  :to => 'users#new'
+  # added these two once we added the sessions resource above
+  match '/signin',  :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy' 
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

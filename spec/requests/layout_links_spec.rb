@@ -27,6 +27,12 @@ describe "LayoutLinks" do
     response.should have_selector('title', :content => "Sign Up")
   end
   
+  # Added this one when we added the sessions controller
+  it "should have a Sign in up page at '/signin'" do
+    get '/signin'
+    response.should have_selector('title', :content => "Sign In")
+  end
+  
   it "should have the right links on the layout" do
     visit root_path
     response.should have_selector('title', :content => "Home")
